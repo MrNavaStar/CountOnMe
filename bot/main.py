@@ -37,7 +37,7 @@ async def channel(ctx):
 
 
 @bot.command()
-@commands.has_role("Zircanian Tech Support")
+#@commands.has_role("Zircanian Tech Support")
 async def role(ctx, name, name2):
     state.role = name + " " + name2
     await ctx.send("Set fail role to: " + name)
@@ -45,7 +45,7 @@ async def role(ctx, name, name2):
 
 
 @bot.command()
-@commands.has_role("Zircanian Tech Support")
+#@commands.has_role("Zircanian Tech Support")
 async def update(ctx):
     await ctx.send("Updating!")
     subprocess.call(["sh", "./update.sh"])
