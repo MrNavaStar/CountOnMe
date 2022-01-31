@@ -19,7 +19,7 @@ class State:
             "role": self.role
         }
 
-        with open("bot/state.json", "w") as json_file:
+        with open("state.json", "w") as json_file:
             json_file.write(json.dumps(data))
 
     def incrementScore(self):

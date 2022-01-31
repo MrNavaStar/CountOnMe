@@ -1,4 +1,4 @@
 /venv/
 /.env
 /.idea
-/bot/state.json
+/state.json

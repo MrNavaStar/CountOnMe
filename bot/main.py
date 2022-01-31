@@ -32,7 +32,7 @@ async def on_ready():
 @commands.has_role("Zircanian Tech Support")
 async def channel(ctx):
     state.setChannel(ctx.channel.id)
-    await ctx.send(f"I will only listen in {ctx.channel}")
+    await ctx.send(f"I will only listen in {ctx.channel.name}")
     pass
 
 
@@ -114,7 +114,7 @@ if __name__ == '__main__':
         if sys.argv[1] == "updated":
             state.updated = True
 
-    with open("bot/state.json") as json_file:
+    with open("state.json") as json_file:
         data = json.load(json_file)
         state.score = data.get("score")
         state.highestScore = data.get("highestScore")
