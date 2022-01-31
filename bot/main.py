@@ -18,7 +18,7 @@ parser = Parser()
 
 @bot.event
 async def on_ready():
-    print(f'{bot.user} successfully logged in!')
+    print(f"Successfully logged in as: {bot.user}")
     await bot.change_presence(activity=Game("Ur Mom"))
     message = "I have risen!"
     if state.updated:
@@ -32,14 +32,14 @@ async def on_ready():
 @commands.has_role("Zircanian Tech Support")
 async def channel(ctx):
     state.setChannel(ctx.channel.id)
-    await ctx.send("I will only listen in #" + ctx.channel.name)
+    await ctx.send(f"I will only listen in {ctx.channel}")
     pass
 
 
 @bot.command()
 @commands.has_role("Zircanian Tech Support")
-async def role(ctx, name):
-    state.role = name
+async def role(ctx, name, name2):
+    state.role = name + " " + name2
     await ctx.send("Set fail role to: " + name)
     pass
 
