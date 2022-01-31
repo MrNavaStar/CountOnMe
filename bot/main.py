@@ -49,6 +49,7 @@ async def role(ctx, name):
 async def update(ctx):
     await ctx.send("Updating!")
     subprocess.call(["sh", "./bot/update.sh"])
+    quit(0)
 
 
 @bot.command()
