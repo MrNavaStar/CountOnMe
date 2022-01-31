@@ -48,7 +48,7 @@ async def role(ctx, name):
 @commands.has_role("Zircanian Tech Support")
 async def update(ctx):
     await ctx.send("Updating!")
-    subprocess.call(["sh", ".update.sh"])
+    subprocess.call(["sh", "./update.sh"])
     quit(0)
 
 
