@@ -123,5 +123,6 @@ if __name__ == '__main__':
         state.highestScore = data.get("highestScore")
         state.channelId = data.get("channelId")
         state.role = data.get("role")
+    print("Data loaded from json")
 
     bot.run(DISCORD_BOT_TOKEN)
