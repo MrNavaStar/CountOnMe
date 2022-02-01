@@ -82,10 +82,11 @@ async def on_message(message):
 
                     member = message.author
                     failRole = discord.utils.get(message.guild.roles, name=state.role)
-                    member.add_role(failRole)
+                    if state.role != "null":
+                        member.add_role(failRole)
 
                     await message.add_reaction("❌")
-                    await message.channel.send(message.author.mention + " " + get("https://evilinsult.com/generate_insult.php").text)
+                    await message.channel.send(f"{message.author.mention} {get('https://evilinsult.com/generate_insult.php').text}")
                     await message.channel.send("Score set back to 0")
     finally:
         await bot.process_commands(message)
