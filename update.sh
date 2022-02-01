@@ -1,6 +1,6 @@
 #!/bin/bash
 start_cmd="python3 bot/main.py updated"
-repo_branch="origin/master"
+repo_branch="origin/main"
 
 echo "Updating..."
 git fetch --all

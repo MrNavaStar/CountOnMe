@@ -97,9 +97,6 @@ async def on_message_delete(message):
     if message.author == bot.user:
         return
 
-    if message.channel.id == state.channelId:
-        await message.channel.send("Message deleted")
-
     try:
         if message.channel.id == state.channelId:
             content = message.content.__str__().replace("\'", "").replace("\"", "")
