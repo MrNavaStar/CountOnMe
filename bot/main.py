@@ -23,12 +23,11 @@ async def on_ready():
     if state.updated:
         message = "Updated!"
 
-    if state.channelId is not None:
+    if state.channelId != 0:
         await bot.get_channel(state.channelId).send(f"{message} Last sent value was: {state.score}")
 
 
 @bot.command()
-@commands.has_role("Zircanian Tech Support")
 async def channel(ctx):
     state.setChannel(ctx.channel.id)
     await ctx.send(f"I will only listen in {ctx.channel.name}")
@@ -36,7 +35,6 @@ async def channel(ctx):
 
 
 @bot.command()
-@commands.has_role("Zircanian Tech Support")
 async def role(ctx, name, name2):
     state.role = name + " " + name2
     await ctx.send("Set fail role to: " + name)
@@ -44,7 +42,6 @@ async def role(ctx, name, name2):
 
 
 @bot.command()
-@commands.has_role("Zircanian Tech Support")
 async def update(ctx):
     await ctx.send("Updating!")
     subprocess.call(["sh", "./update.sh"])
