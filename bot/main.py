@@ -27,7 +27,7 @@ async def on_ready():
         await bot.get_channel(state.channelId).send(f"{message} Last sent value was: {state.score}")
 
 
-@bot.command()
+@bot.command(pass_context=True)
 @commands.has_role("Zircanian Tech Support")
 async def channel(ctx):
     state.setChannel(ctx.channel.id)
@@ -35,15 +35,16 @@ async def channel(ctx):
     pass
 
 
-@bot.command()
+@bot.command(pass_context=True)
 @commands.has_role("Zircanian Tech Support")
-async def role(ctx, name, name2):
-    state.role = name + " " + name2
-    await ctx.send("Set fail role to: " + name + " " + name2)
+async def role(ctx, id):
+    state.setRole(id)
+    failedRole = ctx.guild.get_role(id)
+    await ctx.send(f"Set fail role to: {failedRole}")
     pass
 
 
-@bot.command()
+@bot.command(pass_context=True)
 @commands.has_role("Zircanian Tech Support")
 async def update(ctx):
     await ctx.send("Updating!")
@@ -51,7 +52,7 @@ async def update(ctx):
     quit(0)
 
 
-@bot.command()
+@bot.command(pass_context=True)
 async def score(ctx):
     if ctx.channel.id == state.channelId:
         await ctx.send(f"High Score: {state.highestScore}")
@@ -87,9 +88,9 @@ async def on_message(message):
                     await message.channel.send(f"{message.author.mention} {get('https://evilinsult.com/generate_insult.php').text}")
                     await message.channel.send("Score set back to 0")
 
-                    if state.role != "null":
+                    if state.roleId != 0:
                         member = message.author
-                        failRole = discord.utils.get(message.guild.roles, name=state.role)
+                        failRole = discord.utils.get(message.guild.roles, id=state.roleId)
                         member.add_role(failRole)
     finally:
         await bot.process_commands(message)
@@ -121,11 +122,11 @@ if __name__ == '__main__':
             data["score"] = state.score.__str__()
             data["highestScore"] = state.highestScore.__str__()
             data["channelId"] = state.channelId.__str__()
-            data["role"] = state.role.__str__()
+            data["role"] = state.roleId.__str__()
         else:
             state.score = int(data["score"])
             state.highestScore = int(data["highestScore"])
             state.channelId = int(data["channelId"])
-            state.role = data["role"]
+            state.roleId = int(data["role"])
 
     bot.run(DISCORD_BOT_TOKEN)

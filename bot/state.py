@@ -8,7 +8,7 @@ class State:
         self.lastAuthor = None
         self.highestScore = 0
         self.channelId = 0
-        self.role = "null"
+        self.roleId = 0
         self.updated = False
 
     def save(self):
@@ -16,7 +16,7 @@ class State:
             data["score"] = self.score.__str__()
             data["highestScore"] = self.highestScore.__str__()
             data["channelId"] = self.channelId.__str__()
-            data["role"] = self.role.__str__()
+            data["role"] = self.roleId.__str__()
 
     def incrementScore(self):
         self.score += 1
@@ -35,4 +35,8 @@ class State:
 
     def setChannel(self, channelId):
         self.channelId = channelId
+        self.save()
+
+    def setRole(self, id):
+        self.roleId = id
         self.save()
