@@ -37,7 +37,7 @@ async def channel(ctx):
 @bot.command()
 async def role(ctx, name, name2):
     state.role = name + " " + name2
-    await ctx.send("Set fail role to: " + name)
+    await ctx.send("Set fail role to: " + name + " " + name2)
     pass
 
 
@@ -65,7 +65,7 @@ async def on_message(message):
             content = message.content.__str__().replace("\'", "").replace("\"", "")
             math = parser.parse(content).evaluate({})
 
-            if (math == state.score + 1 or (state.score + 1 == 21 and "9+10" in message.content)) and state.lastAuthor != message.author.name:
+            if (math == state.score + 1 or (state.score + 1 == 21 and "9+10" == message.content)) and state.lastAuthor != message.author.name:
                 state.incrementScore()
                 state.setLastAuthor(message.author.name)
 
@@ -101,7 +101,9 @@ async def on_message_delete(message):
         if message.channel.id == state.channelId:
             content = message.content.__str__().replace("\'", "").replace("\"", "")
             math = parser.parse(content).evaluate({})
-            await message.channel.send(message.author.mention + " deleted their message! Last number was: " + math.__str__())
+
+            if math == state.score:
+                await message.channel.send(f"{message.author.mention} deleted their message! Last number was: {math}")
     finally:
         return
 

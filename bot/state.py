@@ -8,7 +8,7 @@ class State:
         self.lastAuthor = None
         self.highestScore = 0
         self.channelId = 0
-        self.role = None
+        self.role = ""
         self.updated = False
 
     def save(self):
