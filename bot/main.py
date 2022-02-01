@@ -117,6 +117,9 @@ if __name__ == '__main__':
             state.updated = True
 
     with dbm.open("bot_state", "c") as data:
+        if "score" not in data:
+            state.save()
+
         state.score = int(data["score"])
         state.highestScore = int(data["highestScore"])
         state.channelId = int(data["channelId"])
