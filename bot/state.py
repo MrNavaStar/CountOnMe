@@ -7,7 +7,7 @@ class State:
         self.score = 0
         self.lastAuthor = None
         self.highestScore = 0
-        self.channelId = None
+        self.channelId = 0
         self.role = None
         self.updated = False
 
