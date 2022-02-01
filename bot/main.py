@@ -118,7 +118,10 @@ if __name__ == '__main__':
 
     with dbm.open("bot_state", "c") as data:
         if "score" not in data:
-            state.save()
+            data["score"] = state.score.__str__()
+            data["highestScore"] = state.highestScore.__str__()
+            data["channelId"] = state.channelId.__str__()
+            data["role"] = state.role.__str__()
 
         state.score = int(data["score"])
         state.highestScore = int(data["highestScore"])
