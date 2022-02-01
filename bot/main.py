@@ -27,7 +27,7 @@ async def on_ready():
         await bot.get_channel(state.channelId).send(f"{message} Last sent value was: {state.score}")
 
 
-@bot.command(pass_context=True)
+@bot.command()
 @commands.has_role("Zircanian Tech Support")
 async def channel(ctx):
     state.setChannel(ctx.channel.id)
@@ -35,7 +35,7 @@ async def channel(ctx):
     pass
 
 
-@bot.command(pass_context=True)
+@bot.command()
 @commands.has_role("Zircanian Tech Support")
 async def role(ctx, id):
     state.setRole(id)
@@ -44,7 +44,7 @@ async def role(ctx, id):
     pass
 
 
-@bot.command(pass_context=True)
+@bot.command()
 @commands.has_role("Zircanian Tech Support")
 async def update(ctx):
     await ctx.send("Updating!")
@@ -52,7 +52,7 @@ async def update(ctx):
     quit(0)
 
 
-@bot.command(pass_context=True)
+@bot.command()
 async def score(ctx):
     if ctx.channel.id == state.channelId:
         await ctx.send(f"High Score: {state.highestScore}")
