@@ -80,9 +80,9 @@ async def on_message(message):
                 else:
                     state.resetScore()
 
-                    member = message.author
-                    failRole = discord.utils.get(message.guild.roles, name=state.role)
                     if state.role != "null":
+                        member = message.author
+                        failRole = discord.utils.get(message.guild.roles, name=state.role)
                         member.add_role(failRole)
 
                     await message.add_reaction("❌")
