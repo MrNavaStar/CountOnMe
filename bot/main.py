@@ -1,7 +1,6 @@
-import json
 import subprocess
 import sys
-
+import dbm
 import discord
 from discord.ext import commands
 from discord import Game
@@ -37,7 +36,7 @@ async def channel(ctx):
 
 
 @bot.command()
-#@commands.has_role("Zircanian Tech Support")
+@commands.has_role("Zircanian Tech Support")
 async def role(ctx, name, name2):
     state.role = name + " " + name2
     await ctx.send("Set fail role to: " + name)
@@ -45,7 +44,7 @@ async def role(ctx, name, name2):
 
 
 @bot.command()
-#@commands.has_role("Zircanian Tech Support")
+@commands.has_role("Zircanian Tech Support")
 async def update(ctx):
     await ctx.send("Updating!")
     subprocess.call(["sh", "./update.sh"])
@@ -117,12 +116,10 @@ if __name__ == '__main__':
         if sys.argv[1] == "updated":
             state.updated = True
 
-    with open("state.json") as json_file:
-        data = json.load(json_file)
-        state.score = data.get("score")
-        state.highestScore = data.get("highestScore")
-        state.channelId = data.get("channelId")
-        state.role = data.get("role")
-    print("Data loaded from json")
+    with dbm.open("bot_state", "c") as data:
+        state.score = int(data["score"])
+        state.highestScore = int(data["highestScore"])
+        state.channelId = int(data["channelId"])
+        state.role = data["role"]
 
     bot.run(DISCORD_BOT_TOKEN)

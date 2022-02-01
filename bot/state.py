@@ -1,4 +1,4 @@
-import json
+import dbm
 
 
 class State:
@@ -12,15 +12,11 @@ class State:
         self.updated = False
 
     def save(self):
-        data = {
-            "score": self.score,
-            "highestScore": self.highestScore,
-            "channelId": self.channelId,
-            "role": self.role
-        }
-
-        with open("state.json", "w") as json_file:
-            json_file.write(json.dumps(data))
+        with dbm.open("bot_state", "c") as data:
+            data["score"] = self.score.__str__()
+            data["highestScore"] = self.highestScore.__str__()
+            data["channelId"] = self.channelId.__str__()
+            data["role"] = self.role
 
     def incrementScore(self):
         self.score += 1
