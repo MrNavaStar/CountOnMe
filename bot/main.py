@@ -39,7 +39,7 @@ async def channel(ctx):
 @commands.has_role("Zircanian Tech Support")
 async def role(ctx, id):
     state.setRole(id)
-    failedRole = ctx.guild.get_role(id)
+    failedRole = discord.utils.get(bot.get_guild(ctx.guild.id).roles, id=id)
     await ctx.send(f"Set fail role to: {failedRole}")
     pass
 
