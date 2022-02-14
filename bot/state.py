@@ -25,7 +25,7 @@ class State:
         self.amountSinceLastSwitch = 10
 
     def incrementScore(self):
-        self.score += 1
+        self.score += self.direction
         self.amountSinceLastSwitch -= 1
         if self.score > self.highestScore:
             self.highestScore += 1
