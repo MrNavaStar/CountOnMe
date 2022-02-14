@@ -10,6 +10,8 @@ class State:
         self.channelId = 0
         self.roleId = 0
         self.updated = False
+        self.direction = 1
+        self.amountSinceLastSwitch = 0
 
     def save(self):
         with dbm.open("bot_state", "c") as data:
@@ -18,14 +20,21 @@ class State:
             data["channelId"] = self.channelId.__str__()
             data["role"] = self.roleId.__str__()
 
+    def setDirection(self, direction):
+        self.direction = direction
+        self.amountSinceLastSwitch = 10
+
     def incrementScore(self):
         self.score += 1
+        self.amountSinceLastSwitch -= 1
         if self.score > self.highestScore:
             self.highestScore += 1
         self.save()
 
     def resetScore(self):
         self.score = 0
+        self.amountSinceLastSwitch = 0
+        self.direction = 1
         self.lastAuthor = None
         self.save()
 

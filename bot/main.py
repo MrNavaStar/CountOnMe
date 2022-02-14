@@ -58,6 +58,20 @@ async def score(ctx):
     pass
 
 
+@bot.command()
+async def swap(ctx):
+    if ctx.channel.id == state.channelId:
+        if state.amountSinceLastSwitch == 0:
+            if state.direction == 1:
+                state.setDirection(-1)
+            else:
+                state.setDirection(1)
+            await ctx.send("Count direction has swapped!")
+        else:
+            await ctx.send("Too soon!")
+    pass
+
+
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
@@ -68,7 +82,12 @@ async def on_message(message):
             content = message.content.__str__().replace("\'", "").replace("\"", "")
             math = parser.parse(content).evaluate({})
 
-            if (math == state.score + 1 or (state.score + 1 == 21 and "9+10" == message.content)) and state.lastAuthor != message.author.name:
+            if state.direction == 1:
+                value = state.score + 1
+            else:
+                value = state.score -1
+
+            if (math == state.score + state.direction or (value == 21 and "9+10" == message.content)) and state.lastAuthor != message.author.name:
                 state.incrementScore()
                 state.setLastAuthor(message.author.name)
 
