@@ -7,6 +7,7 @@ class State:
         self.score = 0
         self.lastAuthor = None
         self.highestScore = 0
+        self.lowestScore = 0
         self.channelId = 0
         self.roleId = 0
         self.updated = False
@@ -17,6 +18,7 @@ class State:
         with dbm.open("bot_state", "c") as data:
             data["score"] = self.score.__str__()
             data["highestScore"] = self.highestScore.__str__()
+            data["lowestScore"] = self.lowestScore.__str__()
             data["channelId"] = self.channelId.__str__()
             data["role"] = self.roleId.__str__()
 
@@ -29,6 +31,8 @@ class State:
         self.amountSinceLastSwitch -= 1
         if self.score > self.highestScore:
             self.highestScore += 1
+        if self.score < self.lowestScore:
+            self.lowestScore -= 1
         self.save()
 
     def resetScore(self):

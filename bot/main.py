@@ -86,7 +86,7 @@ async def on_message(message):
                 state.incrementScore()
                 state.setLastAuthor(message.author.name)
 
-                if state.score > state.highestScore:
+                if state.score > state.highestScore or state.score < state.lowestScore:
                     await message.add_reaction("👑")
                 else:
                     await message.add_reaction("✅")
