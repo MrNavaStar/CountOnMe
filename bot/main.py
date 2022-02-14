@@ -99,7 +99,7 @@ async def on_message(message):
 
                     await message.add_reaction("❌")
                     await message.channel.send(f"{message.author.mention} {get('https://evilinsult.com/generate_insult.php').text}")
-                    await message.channel.send("Score set back to 0")
+                    await message.channel.send("Score set back to 0 and count direction reset")
 
                     if state.roleId != 0:
                         member = message.author
