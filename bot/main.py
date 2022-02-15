@@ -52,9 +52,16 @@ async def update(ctx):
 
 
 @bot.command()
-async def score(ctx):
+async def highscore(ctx):
     if ctx.channel.id == state.channelId:
         await ctx.send(f"High Score: {state.highestScore}")
+    pass
+
+
+@bot.command()
+async def lowscore(ctx):
+    if ctx.channel.id == state.channelId:
+        await ctx.send(f"High Score: {state.lowestScore}")
     pass
 
 
