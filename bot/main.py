@@ -28,7 +28,7 @@ async def on_ready():
 
 
 @bot.command()
-@commands.has_role("Zircanian Tech Support")
+@commands.has_role(736736281727336529)
 async def channel(ctx):
     state.setChannel(ctx.channel.id)
     await ctx.send(f"I will only listen in {ctx.channel.name}")
@@ -36,7 +36,7 @@ async def channel(ctx):
 
 
 @bot.command()
-@commands.has_role("Zircanian Tech Support")
+@commands.has_role(736736281727336529)
 async def role(ctx, id):
     state.setRole(id)
     await ctx.send(f"Set fail role to: {id}")
@@ -44,7 +44,7 @@ async def role(ctx, id):
 
 
 @bot.command()
-@commands.has_role("Zircanian Tech Support")
+@commands.has_role(736736281727336529)
 async def update(ctx):
     await ctx.send("Updating!")
     subprocess.call(["sh", "./update.sh"])
