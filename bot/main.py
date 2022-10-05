@@ -89,7 +89,7 @@ async def on_message(message):
             content = message.content.__str__().replace("\'", "").replace("\"", "")
             math = parser.parse(content).evaluate({})
 
-            if (math == state.score + state.direction or (state.score + state.direction == 21 and "9+10" == message.content) or math == bin(state.score + state.direction)) and state.lastAuthor != message.author.name:
+            if (math == state.score + state.direction or (state.score + state.direction == 21 and "9+10" == message.content) or math == bin(state.score + state.direction)[2:]) and state.lastAuthor != message.author.name:
                 state.incrementScore()
                 state.setLastAuthor(message.author.name)
 
